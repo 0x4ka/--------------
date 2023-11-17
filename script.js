@@ -34,7 +34,7 @@ function initializeLiff(liffId) {
         });
 
     // コールバックを使用する方法
-    liff.init({ liffId: "123456-abcedfg" }, successCallback, errorCallback);
+    liff.init({ liffId: liffId }, successCallback, errorCallback);
 }
 
 
