@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    height: 100svh;
+}
+
+.chat-container {
+    margin: auto;
+    background: #f0f0f0;
+    max-width: 430px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    list-style: none;
+    margin: 0;
+}
+
+#messages li {
+    margin-bottom: 0px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#messages message-container.sent {
+    max-width: 70%;
+    margin-right: 0;
+    margin-left: auto;
+    background-color: #dcf8c6;
+}
+
+#messages li.received {
+    max-width: 70%;
+    background-color: #fff;
+}
+
+#messageForm {
+    display: flex;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+#messageInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+#messageForm button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 20px;
+    margin-left: 10px;
+    font-size: 14px;;
+}
+
+#loadMessagesBtn {
+    padding: 10px 15px;
+    height: 60px;
+    width: 100%;
+    background: white;
+    border: 0px;
+    border-bottom: 1px solid #ddd;
+    color: #888;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.no-new-messages {
+    text-align: center;
+    color: #888;
+    font-size: 12px;
+    margin: 10px 0;
+}
+
+.message-timestamp {
+    display: block;
+    text-align: right;
+    color: #888;
+    font-size: 12px;
+    margin-top: 2px;
+    margin-left: 8px;
+}
+
+.message-container {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.message-bubble {
+    width: fit-content;
+    padding: 10px 15px; 
+    border-radius: 30px;
+    background-color: #dcf8c6; /* あなたのメッセージの背景色 */
+}
+
+.message-container.received .message-bubble {
+    background-color: #fff; /* 他の人のメッセージの背景色 */
+}
+
+.message-container.received .message-timestamp {
+    margin-left: 5px;
+    margin-right: 8px;
+}
+
+
+.message-container.sent {
+    justify-content: flex-end;
+}
+
+.message-container.sent .message-bubble {
+    background-color: #dcf8c6; /* 自分のメッセージの背景色 */
+}
+
+.user-id-input {
+    text-align: center;
+    padding: 10px;
+}
+
+#userIdInput {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#setUserIdBtn {
+    padding: 5px 10px;
+    margin-left: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
