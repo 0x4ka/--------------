@@ -13,6 +13,31 @@ document.getElementById('setUserIdBtn').addEventListener('click', function() {
     userIdInput.disabled = true; // IDが設定されたら入力を無効化
 });*/
 
+document.addEventListener('DOMContentLoaded', function () {
+    const liffId = "2001729246-OyV02Q24";
+    initializeLiff(liffId);
+});
+
+function initializeLiff(liffId) {
+    // Promiseオブジェクトを使用する方法
+    liff
+        .init({
+            liffId: liffId, // Use own liffId
+        })
+        .then(() => {
+            // Start to use liff's api
+            console.log("11");
+        })
+        .catch((err) => {
+            // Error happens during initialization
+            console.log(err.code, err.message);
+        });
+
+    // コールバックを使用する方法
+    liff.init({ liffId: "123456-abcedfg" }, successCallback, errorCallback);
+}
+
+
 document.getElementById('messageForm').addEventListener('submit', function(e) {
     e.preventDefault();
     let messageInput = document.getElementById('messageInput');
@@ -58,7 +83,6 @@ function formatTimestamp(timestamp) {
 
 function loadMessages() {
     const url = `${apiEndpoint}?type=getMessages&lastId=${lastMessageId}`;
-    console.log(url);
     fetch(url)
         .then(response => response.json())
         .then(messages => {
