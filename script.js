@@ -26,15 +26,12 @@ function initializeLiff(liffId) {
         })
         .then(() => {
             // Start to use liff's api
-            console.log("11");
+            myUserId = liffId;
         })
         .catch((err) => {
             // Error happens during initialization
             console.log(err.code, err.message);
         });
-
-    // コールバックを使用する方法
-    liff.init({ liffId: liffId }, successCallback, errorCallback);
 }
 
 
