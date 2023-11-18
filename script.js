@@ -1,28 +1,30 @@
-let myUserId = null;
 const apiEndpoint = 'https://script.google.com/macros/s/AKfycbzaGmELTSP_A4rbFEGGPWUdBBzQfp61qnPWWJbnthzptcUKDO9nqHztk_nf89zJP8lWwg/exec';
 let lastMessageId = null; // 最後に読み込んだメッセージのID
-let params = new URLSearchParams(window.location.search);;
+let params = new URLSearchParams(window.location.search);
 let roomId = params.get('roomId');
-document.title = roomId + "ルーム";
+let userId = params.get('userId');
+document.title = roomId + "ルームに" + userId;
 
+/*
 document.getElementById('setUserIdBtn').addEventListener('click', function() {
     let userIdInput = document.getElementById('userIdInput');
-    myUserId = userIdInput.value;
-    if (!myUserId) {
+    userId = userIdInput.value;
+    if (!userId) {
         alert('ユーザーIDを入力してください。');
         return;
     }
-    document.title = roomId + "ルームに" + myUserId;
+    document.title = roomId + "ルームに" + userId;
     userIdInput.disabled = true; // IDが設定されたら入力を無効化
     loadMessages();
 });
+*/
 
 document.getElementById('messageForm').addEventListener('submit', function(e) {
     e.preventDefault();
     let messageInput = document.getElementById('messageInput');
     let message = messageInput.value;
     if (message) {
-        sendMessage({ userId: myUserId, message, roomId });
+        sendMessage({ userId: userId, message, roomId });
         messageInput.value = '';
     }
 });
@@ -61,7 +63,7 @@ function formatTimestamp(timestamp) {
 }
 
 function loadMessages() {
-    const url = `${apiEndpoint}?type=getMessages&lastId=${lastMessageId}&roomId=${roomId}`;
+    const url = `${apiEndpoint}?type=getMessages&lastId=${lastMessageId}&roomId=${roomId}&userId=${userId}`;
     fetch(url)
         .then(response => response.json())
         .then(messages => {
@@ -69,10 +71,21 @@ function loadMessages() {
                 showNoNewMessages();
             } else {
                 messages.forEach(messageData => {
-                    addMessage(messageData, messageData.userId === myUserId);
+                    addMessage(messageData, messageData.userId === userId);
                     lastMessageId = messageData.messageId;
                 });
             }
+        });
+}
+
+function newMessageAmount() {
+    const url = `${apiEndpoint}?type=getMessages&lastId=${lastMessageId}&roomId=${roomId}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(messages => {
+            console.log(messages.length);
+            //let messageBubble = document.createElement('div');
+            //messageBubble.textContent = messages.length;
         });
 }
 
@@ -84,7 +97,7 @@ function showNoNewMessages() {
 }
 
 document.getElementById('loadMessagesBtn').addEventListener('click', function() {
-    if(myUserId != null){
+    if(userId != null){
         loadMessages();
     } else {
         alert('ユーザーIDを入力してください。');
@@ -92,4 +105,5 @@ document.getElementById('loadMessagesBtn').addEventListener('click', function() 
     }
 });
 
-//window.onload = loadMessages;
+window.onload = newMessageAmount;
+window.onload = loadMessages;

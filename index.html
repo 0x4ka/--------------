@@ -3,22 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>メッセージアプリ</title>
+    <title>ログイン</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="chat-container">
-        <div class="user-id-input">
+    <div class="login-container">
+        <form id="loginForm">
+            <input type="text" id="roomIdInput" placeholder="ルームIDを入力" />
             <input type="text" id="userIdInput" placeholder="ユーザーIDを入力" />
-            <button id="setUserIdBtn">設定</button>
-        </div>
-        <button id="loadMessagesBtn">新着メッセージを問い合わせる</button>
-        <ul id="messages"></ul>
-        <form id="messageForm">
-            <input type="text" id="messageInput" placeholder="メッセージを入力" />
-            <button type="submit">書き込み</button>
+            <button type="submit">入室</button>
         </form>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var roomId = new URLSearchParams(window.location.search).get('roomId');
+            if (roomId) {
+                document.getElementById('roomIdInput').style.display = 'none';
+            }
+        });
+        
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var userId = document.getElementById('userIdInput').value;
+            var roomId = document.getElementById('roomIdInput').value;
+            if (!userId) {
+                alert('ユーザーIDを入力してください。');
+                return;
+            }
+            if (!roomId) {
+                alert('ルームIDを入力してください。');
+                return;
+            }
+            let params = new URLSearchParams(window.location.search);
+            window.location.href = `/chat.html?roomId=${params.get('roomId')? params.get('roomId'): roomId}&userId=${encodeURIComponent(userId)}`;
+        });
+    </script>
 </body>
 </html>
