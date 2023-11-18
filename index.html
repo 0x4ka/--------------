@@ -35,7 +35,7 @@
                 return;
             }
             let params = new URLSearchParams(window.location.search);
-            window.location.href = `/chat.html?roomId=${params.get('roomId')? params.get('roomId'): roomId}&userId=${encodeURIComponent(userId)}`;
+            window.location.href = `${location.href}/${location.pathname}/chat.html?roomId=${params.get('roomId')? params.get('roomId'): roomId}&userId=${encodeURIComponent(userId)}`;
         });
     </script>
 </body>
