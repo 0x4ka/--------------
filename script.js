@@ -84,7 +84,12 @@ function showNoNewMessages() {
 }
 
 document.getElementById('loadMessagesBtn').addEventListener('click', function() {
-    loadMessages();
+    if(myUserId != null){
+        loadMessages();
+    } else {
+        alert('ユーザーIDを入力してください。');
+        return;
+    }
 });
 
 //window.onload = loadMessages;
