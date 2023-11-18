@@ -216,3 +216,49 @@ body {
 .message-container.received .bubble-container {
     align-items: flex-start;
 }
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.message-user-id {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.bubble-container {
+    display: flex;
+    align-items: flex-end;
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #fff; /* 他の人のメッセージの背景色 */
+}
+
+.message-timestamp {
+    color: #888;
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+.message-container.sent {
+    align-items: flex-end;
+}
+
+.message-container.sent .message-bubble {
+    background-color: #dcf8c6; /* 自分のメッセージの背景色 */
+}
+
+.message-container.received {
+    align-items: flex-start;
+}
+
+.message-container.received .bubble-container {
+    align-items: flex-end;
+}
