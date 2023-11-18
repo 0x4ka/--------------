@@ -1,5 +1,5 @@
 let myUserId = null;
-const apiEndpoint = 'https://script.google.com/macros/s/AKfycbzUsmVmIMzzs7Hg1Judfk-cM0w5uZJR1UH1sUhSwYHCQVEAzUTZ8_syFYMM00mcRqm-hw/exec';
+const apiEndpoint = 'https://script.google.com/macros/s/AKfycbzaGmELTSP_A4rbFEGGPWUdBBzQfp61qnPWWJbnthzptcUKDO9nqHztk_nf89zJP8lWwg/exec';
 let lastMessageId = null; // 最後に読み込んだメッセージのID
 let params = new URLSearchParams(window.location.search);;
 let roomId = params.get('roomId');
