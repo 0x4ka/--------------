@@ -3,7 +3,7 @@ const apiEndpoint = 'https://script.google.com/macros/s/AKfycbzaGmELTSP_A4rbFEGG
 let lastMessageId = null; // 最後に読み込んだメッセージのID
 let params = new URLSearchParams(window.location.search);;
 let roomId = params.get('roomId');
-document.title = roomId;
+document.title = roomId + "ルーム";
 
 document.getElementById('setUserIdBtn').addEventListener('click', function() {
     let userIdInput = document.getElementById('userIdInput');
@@ -12,7 +12,7 @@ document.getElementById('setUserIdBtn').addEventListener('click', function() {
         alert('ユーザーIDを入力してください。');
         return;
     }
-    document.title = roomId + "と" + userId;
+    document.title = roomId + "ルームに" + userId;
     userIdInput.disabled = true; // IDが設定されたら入力を無効化
     loadMessages();
 });
