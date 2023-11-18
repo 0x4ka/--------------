@@ -43,16 +43,27 @@ function addMessage(messageData, isMyMessage) {
     let container = document.createElement('div');
     container.className = 'message-container ' + (isMyMessage ? 'sent' : 'received');
 
+    if(messageData.userId != userId){
+        let userIdSpan = document.createElement('span');
+        userIdSpan.textContent = messageData.userId;
+        userIdSpan.className = 'message-user-id';
+        container.appendChild(userIdSpan);
+    }
+
+    let bubbleContainer = document.createElement('div');
+    bubbleContainer.className = 'bubble-container';
+
     let messageBubble = document.createElement('div');
     messageBubble.textContent = messageData.message;
     messageBubble.className = 'message-bubble';
+    bubbleContainer.appendChild(messageBubble);
 
     let timestamp = document.createElement('div');
     timestamp.textContent = formatTimestamp(messageData.timestamp);
     timestamp.className = 'message-timestamp';
+    bubbleContainer.appendChild(timestamp);
 
-    container.appendChild(messageBubble);
-    container.appendChild(timestamp);
+    container.appendChild(bubbleContainer);
 
     document.getElementById('messages').appendChild(container);
 }
