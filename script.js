@@ -1,8 +1,7 @@
 let myUserId = 'user_' + Math.random().toString(36).substr(2, 9); // このユーザーの一意なID
-const apiEndpoint = 'https://script.google.com/macros/s/AKfycbwbsDxzmCW3M3J2p-IYWbydxoDrUgmpYOeOmFGrluosoVp3O5B_Dl2QkT1f9smXtFN6Kw/exec';
+const apiEndpoint = 'https://script.google.com/macros/s/AKfycbw3sh4riBGMBZ9GEkn_rj-XnbnwsBaRRFHqcQvzcGX0JVUuO8EKefhn6YgzGb9xxqaIWw/exec';
 let lastMessageId = null; // 最後に読み込んだメッセージのID
 
-/*
 document.getElementById('setUserIdBtn').addEventListener('click', function() {
     let userIdInput = document.getElementById('userIdInput');
     myUserId = userIdInput.value;
@@ -11,29 +10,8 @@ document.getElementById('setUserIdBtn').addEventListener('click', function() {
         return;
     }
     userIdInput.disabled = true; // IDが設定されたら入力を無効化
-});*/
-
-document.addEventListener('DOMContentLoaded', function () {
-    const liffId = "2001729246-OyV02Q24";
-    initializeLiff(liffId);
+    loadMessages();
 });
-
-function initializeLiff(liffId) {
-    // Promiseオブジェクトを使用する方法
-    liff
-        .init({
-            liffId: liffId, // Use own liffId
-        })
-        .then(() => {
-            // Start to use liff's api
-            myUserId = liffId;
-        })
-        .catch((err) => {
-            // Error happens during initialization
-            console.log(err.code, err.message);
-        });
-}
-
 
 document.getElementById('messageForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -105,4 +83,4 @@ document.getElementById('loadMessagesBtn').addEventListener('click', function() 
     loadMessages();
 });
 
-window.onload = loadMessages;
+//window.onload = loadMessages;
