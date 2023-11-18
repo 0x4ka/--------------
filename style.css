@@ -207,17 +207,6 @@ body {
     margin-left: 8px;
 }
 
-.message-container.sent {
-    align-items: flex-end;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.message-container.sent .message-bubble {
-    background-color: #dcf8c6; /* 自分のメッセージの背景色 */
-}
-
 .message-container.received {
     display: flex;
     flex-direction: column;
