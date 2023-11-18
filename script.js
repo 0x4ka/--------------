@@ -12,7 +12,7 @@ document.getElementById('setUserIdBtn').addEventListener('click', function() {
         alert('ユーザーIDを入力してください。');
         return;
     }
-    document.title = roomId + "ルームに" + userId;
+    document.title = roomId + "ルームに" + myUserId;
     userIdInput.disabled = true; // IDが設定されたら入力を無効化
     loadMessages();
 });
