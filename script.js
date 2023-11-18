@@ -1,6 +1,8 @@
-let myUserId = 'user_' + Math.random().toString(36).substr(2, 9); // このユーザーの一意なID
-const apiEndpoint = 'https://script.google.com/macros/s/AKfycbw3sh4riBGMBZ9GEkn_rj-XnbnwsBaRRFHqcQvzcGX0JVUuO8EKefhn6YgzGb9xxqaIWw/exec';
+let myUserId = null;
+const apiEndpoint = 'https://script.google.com/macros/s/AKfycbzUsmVmIMzzs7Hg1Judfk-cM0w5uZJR1UH1sUhSwYHCQVEAzUTZ8_syFYMM00mcRqm-hw/exec';
 let lastMessageId = null; // 最後に読み込んだメッセージのID
+let params = new URLSearchParams(window.location.search);;
+let roomId = params.get('roomId');
 
 document.getElementById('setUserIdBtn').addEventListener('click', function() {
     let userIdInput = document.getElementById('userIdInput');
@@ -18,18 +20,18 @@ document.getElementById('messageForm').addEventListener('submit', function(e) {
     let messageInput = document.getElementById('messageInput');
     let message = messageInput.value;
     if (message) {
-        sendMessage({ userId: myUserId, message });
+        sendMessage({ userId: myUserId, message, roomId });
         messageInput.value = '';
     }
 });
 
 function sendMessage(data) {
-    const url = `${apiEndpoint}?type=postMessage&userId=${encodeURIComponent(data.userId)}&message=${encodeURIComponent(data.message)}`;
+    const url = `${apiEndpoint}?type=postMessage&userId=${encodeURIComponent(data.userId)}&message=${encodeURIComponent(data.message)}&roomId=${encodeURIComponent(data.roomId)}`;
     fetch(url)
         .then(response => response.json())
         .then(messageData => {
             addMessage(messageData, true);
-            lastMessageId = messageData.id; // 最後のメッセージIDを更新
+            lastMessageId = messageData.messageId; // 最後のメッセージIDを更新
         });
 }
 
@@ -57,7 +59,7 @@ function formatTimestamp(timestamp) {
 }
 
 function loadMessages() {
-    const url = `${apiEndpoint}?type=getMessages&lastId=${lastMessageId}`;
+    const url = `${apiEndpoint}?type=getMessages&lastId=${lastMessageId}&roomId=${roomId}`;
     fetch(url)
         .then(response => response.json())
         .then(messages => {
@@ -66,7 +68,7 @@ function loadMessages() {
             } else {
                 messages.forEach(messageData => {
                     addMessage(messageData, messageData.userId === myUserId);
-                    lastMessageId = messageData.id;
+                    lastMessageId = messageData.messageId;
                 });
             }
         });
