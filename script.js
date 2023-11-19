@@ -43,7 +43,7 @@ function addMessage(messageData, isMyMessage) {
     let container = document.createElement('div');
     container.className = 'message-container ' + (isMyMessage ? 'sent' : 'received');
 
-    if(messageData.userId != userId){
+    if(!isMyMessage){
         let userIdSpan = document.createElement('span');
         userIdSpan.textContent = messageData.userId;
         userIdSpan.className = 'message-user-id';
