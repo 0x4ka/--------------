@@ -9,16 +9,17 @@
 <body>
     <div class="login-container">
         <form id="loginForm">
-            <div class="non-roomId">roomIdを紹介してもらってください。roomIdを指定しない場合はkontonに転送します</div>
-            <input type="text" id="userIdInput" placeholder="ユーザーIDを入力" />
+            <div id="nonRoomId">roomIdを紹介してもらってください。roomIdを指定しない場合はkontonに転送します</div>
+            <div>あなたの名前を入力</div>
+            <input type="text" id="userIdInput" />
             <button type="submit">入室</button>
         </form>
     </div>
     <script>
         let params = new URLSearchParams(window.location.search);
         let roomId = 'konton';
-        if (param.get('roomId') != null) {
-            document.getElementById('non-roomId').style.display = 'none';
+        if (params.get('roomId') != null) {
+            document.getElementById('nonRoomId').style.display = 'none';
         }
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
