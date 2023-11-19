@@ -9,37 +9,22 @@
 <body>
     <div class="login-container">
         <form id="loginForm">
-            <div>roomIdを紹介してもらってください。ない場合は雑多に転送します</div>
-            <input type="text" id="roomIdInput" placeholder="ルームIDを入力" />
+            <div>roomIdを紹介してもらってください。roomIdを指定しない場合はkontonに転送します</div>
             <input type="text" id="userIdInput" placeholder="ユーザーIDを入力" />
             <button type="submit">入室</button>
         </form>
     </div>
     <script>
         let params = new URLSearchParams(window.location.search);
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var roomId = new URLSearchParams(window.location.search).get('roomId');
-            if (roomId) {
-                document.getElementById('roomIdInput').style.display = 'none';
-            }
-        });
+        let roomId = 'konton';
         
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var userId = document.getElementById('userIdInput').value;
-            var roomId = document.getElementById('roomIdInput').value;
             if (!userId) {
-                //userId='nanashi';
-                alert('ユーザーIDを入力してください。');
-                return;
+                userId='nanashi_'+ Math.random().toString(36).substr(2, 9);
             }
-            if (!roomId && params.get('roomId') === null) {
-                //roomId='zatta';
-                alert('ルームIDを入力してください。');
-                return;
-            }
-            window.location.href = `chat.html?roomId=${params.get('roomId')? params.get('roomId'): roomId}&userId=${encodeURIComponent(userId)}`;
+            window.location.href = `chat.html?roomId=${params.get('roomId') != null? params.get('roomId'): roomId}&userId=${encodeURIComponent(userId)}`;
         });
     </script>
 </body>
