@@ -124,6 +124,24 @@ function showNoNewMessages() {
     document.getElementById('messages').appendChild(li);
 }
 
+//reply funciton
+document.getElementById('messages').addEventListener('click', function(event) {
+    var clickedElement = event.target;
+    if (clickedElement.classList.contains('message-bubble')) {
+        // 最も近いmessage-container要素を探す
+        var messageContainer = clickedElement.closest('.message-container');
+        if (messageContainer) {
+            var userIdElement = messageContainer.querySelector('.message-user-id');
+            if (userIdElement) {
+                var userId = userIdElement.textContent;
+                let messageInput = document.getElementById('messageInput');
+                let message = messageInput.value;
+                document.getElementById('messageInput').value = "@" + userId + " " + message;
+            }
+        }
+    }
+});
+
 document.getElementById('loadMessagesBtn').addEventListener('click', function() {
     if(userId != null){
         loadMessages();
