@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログイン</title>
+    <title>徒然なる文通</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="login-container">
         <form id="loginForm">
+            <div>roomIdを紹介してもらってください。ない場合は雑多に転送します</div>
             <input type="text" id="roomIdInput" placeholder="ルームIDを入力" />
             <input type="text" id="userIdInput" placeholder="ユーザーIDを入力" />
             <button type="submit">入室</button>
@@ -29,14 +30,16 @@
             var userId = document.getElementById('userIdInput').value;
             var roomId = document.getElementById('roomIdInput').value;
             if (!userId) {
+                //userId='nanashi';
                 alert('ユーザーIDを入力してください。');
                 return;
             }
             if (!roomId && params.get('roomId') === null) {
+                //roomId='zatta';
                 alert('ルームIDを入力してください。');
                 return;
             }
-            window.location.href = `${params.get('roomId') === null ? "chat.html" : "chat.html"}?roomId=${params.get('roomId')? params.get('roomId'): roomId}&userId=${encodeURIComponent(userId)}`;
+            window.location.href = `chat.html?roomId=${params.get('roomId')? params.get('roomId'): roomId}&userId=${encodeURIComponent(userId)}`;
         });
     </script>
 </body>

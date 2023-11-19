@@ -4,21 +4,7 @@ let lastMessageDate = null;
 let params = new URLSearchParams(window.location.search);
 let roomId = params.get('roomId');
 let userId = params.get('userId');
-document.title = roomId + "ルームに" + userId;
-
-/*
-document.getElementById('setUserIdBtn').addEventListener('click', function() {
-    let userIdInput = document.getElementById('userIdInput');
-    userId = userIdInput.value;
-    if (!userId) {
-        alert('ユーザーIDを入力してください。');
-        return;
-    }
-    document.title = roomId + "ルームに" + userId;
-    userIdInput.disabled = true; // IDが設定されたら入力を無効化
-    loadMessages();
-});
-*/
+document.title = '徒然なる文通 @' + roomId + ' (' + userId + ')';
 
 document.getElementById('messageForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -106,17 +92,6 @@ function loadMessages() {
         });
 }
 
-function newMessageAmount() {
-    const url = `${apiEndpoint}?type=getMessages&lastId=${lastMessageId}&roomId=${roomId}`;
-    fetch(url)
-        .then(response => response.json())
-        .then(messages => {
-            console.log(messages.length);
-            //let messageBubble = document.createElement('div');
-            //messageBubble.textContent = messages.length;
-        });
-}
-
 function showNoNewMessages() {
     let li = document.createElement('li');
     li.textContent = "最新のメッセージはありません";
@@ -151,5 +126,4 @@ document.getElementById('loadMessagesBtn').addEventListener('click', function() 
     }
 });
 
-window.onload = newMessageAmount;
 window.onload = loadMessages;
