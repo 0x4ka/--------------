@@ -1,5 +1,6 @@
 const apiEndpoint = 'https://script.google.com/macros/s/AKfycbzaGmELTSP_A4rbFEGGPWUdBBzQfp61qnPWWJbnthzptcUKDO9nqHztk_nf89zJP8lWwg/exec';
 let lastMessageId = null; // 最後に読み込んだメッセージのID
+let lastMessageDate = null;
 let params = new URLSearchParams(window.location.search);
 let roomId = params.get('roomId');
 let userId = params.get('userId');
@@ -58,6 +59,15 @@ function addMessage(messageData, isMyMessage) {
     messageBubble.className = 'message-bubble';
     bubbleContainer.appendChild(messageBubble);
 
+    const messageDate = new Date(messageData.timestamp);
+    let messageDateString = messageDate.toLocaleDateString();
+    
+    if (lastMessageDate !== messageDateString) {
+        // 日付が変わった場合、日付を表示
+        addDateStamp(messageDateString);
+        lastMessageDate = messageDateString;
+    }
+
     let timestamp = document.createElement('div');
     timestamp.textContent = formatTimestamp(messageData.timestamp);
     timestamp.className = 'message-timestamp';
@@ -71,6 +81,13 @@ function addMessage(messageData, isMyMessage) {
 function formatTimestamp(timestamp) {
     let date = new Date(timestamp);
     return date.getHours() + ':' + date.getMinutes().toString().padStart(2, '0');
+}
+
+function addDateStamp(dateString) {
+    const dateStamp = document.createElement('div');
+    dateStamp.className = 'date-stamp';
+    dateStamp.textContent = dateString;
+    document.getElementById('messages').appendChild(dateStamp);
 }
 
 function loadMessages() {
