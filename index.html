@@ -17,12 +17,12 @@
     <script>
         let params = new URLSearchParams(window.location.search);
         let roomId = 'konton';
-        
+                
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var userId = document.getElementById('userIdInput').value;
             if (!userId) {
-                userId='nanashi_'+ Math.random().toString(36).substr(2, 9);
+                userId='nanashi_'+ Math.random().toString(36).substr(2, 6);
             }
             window.location.href = `chat.html?roomId=${params.get('roomId') != null? params.get('roomId'): roomId}&userId=${encodeURIComponent(userId)}`;
         });
